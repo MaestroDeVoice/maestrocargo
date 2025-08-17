@@ -1,6 +1,7 @@
-import MainHeader from './components/MainHeader/MainHeader'
+import MainHeader from "./components/MainHeader/MainHeader";
 // import MainContent from './components/MainContent'
 // import MainFooter from './components/MainFooter'
+import "./App.css";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       {/* <MainContent />
       <MainFooter /> */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
