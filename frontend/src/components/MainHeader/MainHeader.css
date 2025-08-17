@@ -1,0 +1,8 @@
+.main-header {
+  max-height: 90px;
+  max-width: 1200px;
+}
+
+.main-header__logo {
+  margin-right: 30px;
+}
