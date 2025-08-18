@@ -1,8 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-
 .main-header {
   display: flex;
-  justify-content: space-between;
+  gap: 30px;
+  justify-content: center;
   align-items: center;
 
   height: 90px;
@@ -35,12 +34,11 @@
 }
 
 .main-header__time {
-  height: 32px;
+  height: 30px;
   border-bottom: solid 2px #06487e;
 }
 
 .main-header__time span {
-  display: block;
   height: 24px;
 
   color: #06487e;

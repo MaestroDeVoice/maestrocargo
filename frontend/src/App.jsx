@@ -1,5 +1,5 @@
 import MainHeader from "./components/MainHeader/MainHeader";
-// import MainContent from './components/MainContent'
+import MainContent from './components/MainContent/MainContent'
 // import MainFooter from './components/MainFooter'
 import "./App.css";
 
@@ -7,8 +7,8 @@ function App() {
   return (
     <>
       <MainHeader />
-      {/* <MainContent />
-      <MainFooter /> */}
+      <MainContent />
+      {/* <MainFooter /> */}
     </>
   );
 }
