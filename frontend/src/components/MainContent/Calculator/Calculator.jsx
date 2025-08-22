@@ -1,12 +1,48 @@
 import { useState } from "react";
+import InputRange from "./InputRange/InputRange";
+import SelectMovers from "./SelectMovers/SelectMovers";
 import "./Calculator.css";
 
 function Calculator() {
-  const [formatCalc, setFormatCalc] = useState(false);
-
-  function handleClickCity() {
+  const [formatCalc, setFormatCalc] = useState(true);
+  const [calculateData, setCalculateData] = useState({
+    workTime: 2,
+    moversNum: 0,
+    priceMovers: 900,
+  });
+  const handleClickCity = () => {
     setFormatCalc(!formatCalc);
-  }
+    setCalculateData(
+      formatCalc
+        ? { distance: 100, priceOneKm: 100 }
+        : {
+            workTime: 2,
+            moversNum: 0,
+            priceMovers: 900,
+          }
+    );
+  };
+
+  const handleChangeWorkTime = (event) => {
+    setCalculateData({
+      ...calculateData,
+      workTime: parseInt(event.target.value),
+    });
+  };
+
+  const handleChangeMoversNum = (event) => {
+    setCalculateData({
+      ...calculateData,
+      moversNum: parseInt(event.target.value),
+    });
+  };
+
+  const handleChangeDistance = (event) => {
+    setCalculateData({
+      ...calculateData,
+      distance: parseInt(event.target.value),
+    });
+  };
 
   return (
     <>
@@ -19,72 +55,50 @@ function Calculator() {
         </button>
       </div>
       <form className="calculator__form">
-        <lable>Размер кузова автомобиля</lable>
         <div className="calculator__body-sizes">
-          <figure className="body-size three-meters">
-            <img
-              src="https://static.tildacdn.com/tild6434-3064-4532-a365-616630343566/3.svg"
-              alt="3 метра"
-              width="160px"
-            />
-            <figcaption>3 метра</figcaption>
-          </figure>
-          <figure className="body-size four-meters">
-            <img
-              src="https://static.tildacdn.com/tild3661-3663-4135-a335-353138393930/4.svg"
-              alt="4 метра"
-              width="160px"
-            />
-            <figcaption>4 метра</figcaption>
-          </figure>
-          <figure className="body-size five-meters">
-            <img
-              src="https://static.tildacdn.com/tild3239-3033-4132-a636-386262366363/5.svg"
-              alt="5 метров"
-              width="160px"
-            />
-            <figcaption>5 метров</figcaption>
-          </figure>
+          {/* <p>Размер кузова автомобиля</p>
+          <input type="radio" name="bodySize3" id="bodySize" value="3" />
+          <label htmlFor="bodySize3">3 метра</label>
+          <input type="radio" name="bodySize4" id="bodySize" value="4" />
+          <label htmlFor="bodySize4">4 метра</label>
+          <input type="radio" name="bodySize5" id="bodySize" value="5" />
+          <label htmlFor="bodySize5">5 метров</label> */}
         </div>
         {formatCalc ? (
-          <div>
-            <div>
-              <label htmlFor="myRange">Время работы (в часах)</label>
-              <input type="range" min="2" max="24" id="myRange" />
-            </div>
-            <div>
-              <select>
-                <option value="0" selected>
-                  Грузчик не нужен
-                </option>
-                <option value="1">1 грузчик</option>
-                <option value="2">2 грузчика</option>
-                <option value="3">3 грузчика</option>
-                <option value="4">4 грузчика</option>
-                <option value="5">5 грузчиков</option>
-                <option value="6">6 грузчиков</option>
-                <option value="7">7 грузчиков</option>
-                <option value="8">8 грузчиков</option>
-                <option value="9">9 грузчиков</option>
-                <option value="10">10 грузчиков</option>
-              </select>
-            </div>
+          <div className="calculator__format-city">
+            <InputRange
+              title="Время работы (в часах)"
+              min="2"
+              max="24"
+              defaultValue="2"
+              onChange={handleChangeWorkTime}
+            />
+            <SelectMovers onChange={handleChangeMoversNum} />
           </div>
         ) : (
-          <div>
-            <label htmlFor="myRange">Сколько километров?</label>
-            <input type="range" min="100" max="1000" id="myRange" />
-          </div>
+          <InputRange
+            title="Сколько километров?"
+            min="100"
+            max="1000"
+            defaultValue="100"
+            onChange={handleChangeDistance}
+          />
         )}
         <div>
-          <lable>Предварительная стоимость:</lable>
-          <p>3400</p>
+          <p>Предварительная стоимость:</p>
+          <p>
+            {formatCalc
+              ? calculateData.workTime *
+                calculateData.moversNum *
+                calculateData.priceMovers
+              : calculateData.distance * calculateData.priceOneKm}
+          </p>
         </div>
-        <div>
-          <lable htmlFor="telForm">
+        <div className="calculator__form-tel">
+          <label htmlFor="formTel">
             Оставьте свой номер телефона. Мы свяжемся с вами в течение 5 минут.
-          </lable>
-          <input type="tel" id="telForm" />
+          </label>
+          <input type="tel" id="formTel" name="formTel" />
         </div>
         <button type="submit">Отправить заявку</button>
       </form>
